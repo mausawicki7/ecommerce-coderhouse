@@ -1,0 +1,28 @@
+.cart-icon {
+	width: min(3vw, 50px);
+    float: right ;
+    display: block;
+    position: absolute;
+    right: 20px ;
+    bottom: 25px;
+}
+
+.cart-widget {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 80px;
+    bottom: 15px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(124, 124, 124, 0.2);
+    padding: 10px;
+    z-index: 1;
+}
+
+.cart-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    padding: 10px;
+}
