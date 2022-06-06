@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import swal from "sweetalert";
+import { addDoc, collection, getFirestore, where, query, documentId, writeBatch, getDocs } from "firebase/firestore";
 
 const CartContext = createContext([]);
 
@@ -12,6 +13,9 @@ export default function CartContextProvider ({children}) {
   const [cartList, setCartList] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
+  const [orderId, setOrderId] = useState();
+
+ 
 
   /**
    * "isInCart" is a function that takes an item as an argument and returns true if the item is in the
@@ -72,6 +76,44 @@ export default function CartContextProvider ({children}) {
     updateCart(newCartList);
   };
 
+  function createOrder() {
+    let order = {};
+
+    order.buyer = {name: 'Mauricio', email: 'mau.sawicki@gmail.com', phone: '2994081375' };
+    order.total = totalPrice;
+    order.items = cartList.map(item => {
+        const id = item.id;
+        const name = item.name;
+        const quantity = item.quantity;
+        const newStock = item.stock-item.quantity;
+        const price = item.price*item.quantity;
+        return {id, name, quantity, newStock, price}
+    });
+
+    async function updateStocks() {
+        const queryCollectionStocks = collection(db, 'items');
+        const queryUpdateStocks = query(queryCollectionStocks, where(documentId(), 'in', cartList.map(item => item.id)));
+        const batch = writeBatch(db);
+
+        await getDocs(queryUpdateStocks)
+        .then(resp => resp.docs.forEach(
+            res => batch.update(res.ref, {stock: order.items.find(item => item.id === res.id).newStock})
+        ))
+        .catch(err => console.log(err))
+
+        batch.commit()
+    }
+
+
+    const db = getFirestore();
+    const queryCollectionOrders = collection(db, 'orders');
+    addDoc(queryCollectionOrders, order)
+    .then(resp => setOrderId(resp.id))
+    .then(() => updateStocks())
+    .catch(err => console.log(err))
+    .finally(() => clearCart())
+};
+
   return (
     /* Passing the state (cartList) and functions to the CartContext.Provider. */
     <CartContext.Provider
@@ -81,6 +123,8 @@ export default function CartContextProvider ({children}) {
         clearCart,
         removeFromCart,
         updateCart,
+        orderId,
+        createOrder,
         totalPrice,
         totalItems
       }}
