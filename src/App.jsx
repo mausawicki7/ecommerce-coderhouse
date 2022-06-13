@@ -34,7 +34,7 @@ function App() {
               {" | "}
               <a
                 className="App-link"
-                href="https://wonderweb.com.ar/"
+                href="https://mausa.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
