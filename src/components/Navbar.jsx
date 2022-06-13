@@ -9,7 +9,7 @@ const Navbar = () => {
       <Link to="/">
         <div className="navbar-brand">
           <img
-            src="src/assets/img/logos-coderhouse-01.png"
+            src="https://firebasestorage.googleapis.com/v0/b/ecommerce-coderhouse-2f29a.appspot.com/o/logos-coderhouse-01.png?alt=media&token=a08063ed-7ede-4dbe-b9d7-11765fd63325"
             width="20%"
             className="d-inline-block align-top logo-img"
             alt="Logo"
