@@ -24,7 +24,7 @@ function ItemDetail({ item }) {
           <input type="radio" name="colors-btn" id="color-4" />
           <div className="shoe-area">
             <div className="logo-div">
-              <img src="src/assets/img/coder-logo.png" alt="" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/ecommerce-coderhouse-2f29a.appspot.com/o/coder-logo.png?alt=media&token=572e1b25-5943-47a0-a617-7215564e8d52" alt="" />
             </div>
             <div className="floating-div">
               <div className="shoe-1">
