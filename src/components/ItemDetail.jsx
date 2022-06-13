@@ -28,7 +28,7 @@ function ItemDetail({ item }) {
             </div>
             <div className="floating-div">
               <div className="shoe-1">
-                <img src="src/assets/img/thumbnail.png" alt="red-nike" />
+                <img src="https://firebasestorage.googleapis.com/v0/b/ecommerce-coderhouse-2f29a.appspot.com/o/thumbnail.png?alt=media&token=71ffc397-f646-432c-a5cb-720ba6ac79b6" alt="product-image" />
               </div>
             </div>
           </div>
